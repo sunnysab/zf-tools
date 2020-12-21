@@ -1,0 +1,9 @@
+# IDE
+.idea
+.vscode
+
+venv*
+build
+dist
+
+*.pyc
