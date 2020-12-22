@@ -1,6 +1,6 @@
 from collections import namedtuple
-from bs4 import BeautifulSoup
 
+from bs4 import BeautifulSoup
 
 __elements = [
     ('student_no', '学号', '#col_xh > p:nth-child(1)'),
@@ -17,10 +17,6 @@ __elements = [
 ]
 
 Profile = namedtuple('Profile', [x for x, _, _ in __elements])
-
-
-def get_profile_url(user: str):
-    return f'http://jwxt.sit.edu.cn/jwglxt/xsxxxggl/xsgrxxwh_cxXsgrxx.html?gnmkdm=N100801&layout=default&su=#{user}'
 
 
 def parse_profile_page(text: str) -> Profile:

@@ -1,6 +1,5 @@
-from typing import List
-from enum import Enum
 from collections import namedtuple
+from typing import List
 
 # TODO: 增加教学班ID、名称、课程代码等字段
 __elements = [
@@ -15,18 +14,6 @@ __elements = [
 
 # New namedtuple type
 Course = namedtuple('Course', [x for x, _, _ in __elements])
-
-
-# An enum of semester
-class Semester(Enum):
-    FIRST_TERM = 1
-    SECOND_TERM = 2
-
-    def to_raw(self) -> int:
-        if self == self.FIRST_TERM:
-            return 3
-        elif self == self.SECOND_TERM:
-            return 12
 
 
 # Day map
