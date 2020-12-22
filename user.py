@@ -6,7 +6,7 @@ import parsers.profile as profile
 import parsers.score as scores
 import parsers.timetable as timetable
 from global_config import URL
-from parsers.defines import Semester
+from parsers.defines import SchoolYear, Semester
 
 
 class User:
@@ -21,17 +21,17 @@ class User:
         page = self._session.get(URL.PROFILE)
         return profile.parse_profile_page(page.text)
 
-    def get_timetable(self, school_year: int, semester: Semester) -> List[timetable.Course]:
+    def get_timetable(self, school_year: SchoolYear, semester: Semester) -> List[timetable.Course]:
         data = {
-            'xnm': school_year,
+            'xnm': str(school_year),
             'xqm': semester.to_raw(),
         }
         page = self._session.post(URL.TIME_TABLE, data=data)
         return timetable.parse_timetable_page(page.text)
 
-    def get_score_list(self, school_year: int, semester: Semester) -> List[scores.Score]:
+    def get_score_list(self, school_year: SchoolYear, semester: Semester) -> List[scores.Score]:
         data = {
-            'xnm': school_year,
+            'xnm': str(school_year),
             'xqm': semester.to_raw(),
             'queryModel.showCount': '5000',
         }
