@@ -11,10 +11,19 @@ class URL:
     # Page for login success.
     INIT_MENU = HOME + '/jwglxt/xtgl/index_initMenu.html'
 
-    # Function related
+    """ Function related """
+    # Score list page
     SCORE_LIST = HOME + '/jwglxt/cjcx/cjcx_cxDgXscj.html?doType=query&gnmkdm=N305005'
+    # Time table page
     TIME_TABLE = HOME + '/jwglxt/kbcx/xskbcx_cxXsKb.html?gnmkdm=N253508'
+    # Personal profile page
     PROFILE = HOME + '/jwglxt/xsxxxggl/xsgrxxwh_cxXsgrxx.html?gnmkdm=N100801&layout=default'
+    # Major list page
+    MAJOR_LIST = HOME + '/jwglxt/xtgl/comm_cxZyfxList.html?gnmkdm=N214505'
+    # Class list page
+    CLASS_LIST = HOME + '/jwglxt/xtgl/comm_cxBjdmList.html?gnmkdm=N214505'
+
+
 # End of class URL
 
 

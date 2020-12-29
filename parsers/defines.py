@@ -4,14 +4,14 @@ from enum import Enum
 # A class of School year
 class SchoolYear:
     ALL = None
-    year = None
+    __year = None
 
     def __init__(self, year: int = ALL):
-        self.year = year
+        self.__year = year
 
     def __str__(self) -> str:
-        if self.year is not None:
-            return str(self.year)
+        if self.__year is not None:
+            return str(self.__year)
         else:
             return ''
 
