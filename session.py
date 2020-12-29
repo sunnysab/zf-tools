@@ -5,6 +5,7 @@ from typing import Tuple
 import requests
 import rsa
 
+from environment import Environment
 from global_config import URL, REQUEST_OPTION
 from user import User
 
@@ -27,6 +28,8 @@ class Session:
     _user: str = None
     _passwd: str = None
     _session: requests.Session = None
+
+    login_flag: bool = False
 
     def __init__(self, user: str = None, passwd: str = None):
         self._user = user
@@ -61,7 +64,7 @@ class Session:
         err_node = page.select(r'div#home.tab-pane.in.active p#tips.bg_danger.sl_danger')[0]
         return err_node.text.strip()
 
-    def login(self, user: str = _user, passwd: str = _passwd) -> User or str:
+    def login(self, user: str = _user, passwd: str = _passwd) -> str:
         """
         Login the system through simulating a browser
         :param user: username
@@ -69,6 +72,7 @@ class Session:
         :return: If the login succeeds, the function will return a User object with the requests session.
                 Otherwise, it will return a string with the error message provided by the page.
         """
+        self._user = user
         self._session = requests.Session()
 
         # Get login page for the first cookie
@@ -86,6 +90,22 @@ class Session:
         }
         r = self._session.post(URL.LOGIN, data=form_to_post, headers=REQUEST_OPTION)
         if r.url == URL.INIT_MENU:
-            return User(user, self._session)
+            self.login_flag = True
+            return 'success'
         else:
             return self.__get_err_message(r.text)
+
+    def is_login(self) -> bool:
+        return self.login_flag
+
+    def user(self) -> User:
+        if not self.login_flag:
+            raise Exception('You should login first.')
+
+        return User(self._user, self._session)
+
+    def environment(self) -> Environment:
+        if not self.login_flag:
+            raise Exception('You should login first.')
+
+        return Environment(self._session)
