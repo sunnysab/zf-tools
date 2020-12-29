@@ -1,3 +1,4 @@
+import json
 from collections import namedtuple
 from typing import List
 
@@ -26,10 +27,6 @@ DAY_MAP = {
     '星期六': 6,
     '星期日': 7,
 }
-
-
-def get_timetable_url(user: str) -> str:
-    return f'http://jwxt.sit.edu.cn/jwglxt/kbcx/xskbcx_cxXsKb.html?gnmkdm=N253508&su=#{user}'
 
 
 def __expand_weeks_str(week_string: str) -> tuple:
@@ -100,7 +97,5 @@ def parse_timetable_page(page: str) -> List[Course]:
 
 
 if __name__ == '__main__':
-    import json
-
     content = json.load(open('timetable.json', 'r', encoding='utf-8'))
     print(parse_timetable_page(content))

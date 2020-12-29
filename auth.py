@@ -1,9 +1,10 @@
 import base64
 import re
-import rsa
-import requests
-
 from typing import Tuple
+
+import requests
+import rsa
+
 from global_config import URL, REQUEST_OPTION
 from user import User
 
@@ -36,7 +37,7 @@ class Session:
         Request to the system with the cookie we got before, and get the RSA public key.
         :return: RSA public key for encrypting the user password.
         """
-        resp_obj = self.session.get(URL.RSA_PUBLIC_KEY, headers=REQUEST_OPTION).json()
+        resp_obj = self._session.get(URL.RSA_PUBLIC_KEY, headers=REQUEST_OPTION).json()
         return base64.b64decode(resp_obj['modulus']), base64.b64decode(resp_obj['exponent'])
 
     def __get_csrf_token(self, login_page: str) -> str:
@@ -68,10 +69,10 @@ class Session:
         :return: If the login succeeds, the function will return a User object with the requests session.
                 Otherwise, it will return a string with the error message provided by the page.
         """
-        self.session = requests.Session()
+        self._session = requests.Session()
 
         # Get login page for the first cookie
-        login_page = _session.get(URL.LOGIN, headers=REQUEST_OPTION)
+        login_page = self._session.get(URL.HOME, headers=REQUEST_OPTION)
 
         # Get RAS public key to encode the raw password
         public_key, exponent = self.__get_ras_public_key()
@@ -83,8 +84,8 @@ class Session:
             'yhm': user,
             'mm': encrypted_passwd
         }
-        r = self.session.post(URL.LOGIN, data=form_to_post, allow_redirects=False)
-        if r.status_code == 302:
-            return User(user, self.session)
+        r = self._session.post(URL.LOGIN, data=form_to_post, headers=REQUEST_OPTION)
+        if r.url == URL.INIT_MENU:
+            return User(user, self._session)
         else:
             return self.__get_err_message(r.text)
