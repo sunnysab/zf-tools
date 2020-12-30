@@ -1,7 +1,8 @@
-"""
-    Url that probably used in the program.
-"""
+
 class URL:
+    """
+        Url that probably used in the program.
+    """
     # Server address for jwxt
     HOME = 'http://jwxt.sit.edu.cn'
 
@@ -27,9 +28,9 @@ class URL:
 # End of class URL
 
 
-'''
+"""
     Configuration for the spider.
-'''
+"""
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 ' \
              'Safari/537.36 Edg/87.0.664.66 '
 REQUEST_OPTION = {

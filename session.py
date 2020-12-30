@@ -5,8 +5,8 @@ from typing import Tuple
 import requests
 import rsa
 
-from environment import Environment
 from global_config import URL, REQUEST_OPTION
+from environment import Environment
 from user import User
 
 _session = requests.Session()
@@ -45,7 +45,7 @@ class Session:
 
     def __get_csrf_token(self, login_page: str) -> str:
         """
-        Get csrftoken field from the login front page by regex expression, for re is much more faster than beautifulsoup.
+        Get csrftoken field from the login front page by regex expression, for re is much more faster than beautifulsoup
         :param login_page: the login page in text, where we input user and password
         :return: the value of 'csrftoken' field
         """

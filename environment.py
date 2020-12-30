@@ -5,10 +5,8 @@
 
 
 import requests
-
 from global_config import URL, REQUEST_OPTION
-from parsers.classes import parse_class_list_page, parse_major_list_page, Major
-from parsers.defines import SchoolYear, Semester
+from parsers import *
 
 
 class Environment:

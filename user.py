@@ -2,11 +2,8 @@ from typing import List
 
 import requests
 
-import parsers.profile as profile
-import parsers.score as scores
-import parsers.timetable as timetable
 from global_config import URL, REQUEST_OPTION
-from parsers.defines import SchoolYear, Semester
+from parsers import *
 
 
 class User:
@@ -17,11 +14,11 @@ class User:
         self._user = user
         self._session = session
 
-    def get_profile(self) -> profile.Profile:
+    def get_profile(self) -> Profile:
         page = self._session.get(URL.PROFILE, headers=REQUEST_OPTION)
-        return profile.parse_profile_page(page.text)
+        return parse_profile_page(page.text)
 
-    def get_timetable(self, school_year: SchoolYear, semester: Semester) -> List[timetable.Course]:
+    def get_timetable(self, school_year: SchoolYear, semester: Semester) -> List[Course]:
         data = {
             'xnm': str(school_year),
             'xqm': semester.to_raw(),
@@ -29,21 +26,21 @@ class User:
         page = self._session.post(URL.TIME_TABLE, data=data, headers=REQUEST_OPTION)
         return timetable.parse_timetable_page(page.text)
 
-    def get_score_list(self, school_year: SchoolYear, semester: Semester) -> List[scores.Score]:
+    def get_score_list(self, school_year: SchoolYear, semester: Semester) -> List[Score]:
         data = {
             'xnm': str(school_year),
             'xqm': semester.to_raw(),
             'queryModel.showCount': '5000',
         }
         page = self._session.post(URL.SCORE_LIST, data=data, headers=REQUEST_OPTION)
-        return scores.parse_score_list_page(page.text)
+        return parse_score_list_page(page.text)
 
     @staticmethod
-    def calculate_GPA(score_list: List[scores.Score]) -> float:
-        return scores.calculate_GPA(score_list)
+    def calculate_GPA(score_list: List[Score]) -> float:
+        return calculate_GPA(score_list)
 
     def get_GPA(self, school_year: SchoolYear, semester: Semester):
         score_list = self.get_score_list(school_year, semester)
-        return scores.calculate_GPA(score_list)
+        return calculate_GPA(score_list)
 
 # End of the class User.
