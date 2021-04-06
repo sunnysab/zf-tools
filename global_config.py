@@ -9,8 +9,6 @@ class URL:
     # Login related
     LOGIN = HOME + '/jwglxt/xtgl/login_slogin.html'
     RSA_PUBLIC_KEY = HOME + '/jwglxt/xtgl/login_getPublicKey.html'
-    # Page for login success.
-    INIT_MENU = HOME + '/jwglxt/xtgl/index_initMenu.html'
 
     """ Function related """
     # Score list page

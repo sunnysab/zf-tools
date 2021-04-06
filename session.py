@@ -88,12 +88,14 @@ class Session:
             'yhm': user,
             'mm': encrypted_passwd
         }
+        # If the login process succeeds, turn to other page (It may be not sure.
+        # But for the sake of simplicity, I decided to decide whether to fail
         r = self._session.post(URL.LOGIN, data=form_to_post, headers=REQUEST_OPTION)
-        if r.url == URL.INIT_MENU:
+        if r.url.startswith(URL.LOGIN):
+            return self.__get_err_message(r.text)
+        else:
             self.login_flag = True
             return 'success'
-        else:
-            return self.__get_err_message(r.text)
 
     def is_login(self) -> bool:
         return self.login_flag
