@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 import requests
 
@@ -25,6 +25,22 @@ class User:
         }
         page = self._session.post(URL.TIME_TABLE, data=data, headers=REQUEST_OPTION)
         return timetable.parse_timetable_page(page.text)
+
+    @staticmethod
+    def _group_timetable(course_list: List[Course]) -> Dict[str, List[Course]]:
+        result: Dict[str, List[Course]] = {}
+        for course in course_list:
+            course_name = course.course_name
+            if course_name in result:
+                result[course_name].append(course)
+            else:
+                result[course_name] = [course]
+
+        return result
+
+    def get_grouped_timetable(self, school_year: SchoolYear, semester: Semester) -> Dict[str, List[Course]]:
+        time_table = self.get_timetable(school_year, semester)
+        return self._group_timetable(time_table)
 
     def get_score_list(self, school_year: SchoolYear, semester: Semester) -> List[Score]:
         data = {
