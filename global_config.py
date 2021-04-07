@@ -21,6 +21,8 @@ class URL:
     MAJOR_LIST = HOME + '/jwglxt/xtgl/comm_cxZyfxList.html?gnmkdm=N214505'
     # Class list page
     CLASS_LIST = HOME + '/jwglxt/xtgl/comm_cxBjdmList.html?gnmkdm=N214505'
+    # Suggested course and time table
+    SUGGESTED_COURSE = HOME + '/jwglxt/kbdy/bjkbdy_cxBjKb.html?gnmkdm=N214505'
 
 
 # End of class URL

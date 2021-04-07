@@ -18,6 +18,7 @@
 - [x] 查询/计算课程绩点
 - [x] 获取班级列表
 - [x] 获取专业列表
+- [x] 获取专业推荐课表
 - [ ] 查询专业培养计划
 - [ ] 选课
 - [ ] 评教(短时间内不推出)
@@ -44,6 +45,13 @@ if err_message == 'success':
         print(each_course_score)
     # 查询绩点表
     print(user.get_GPA(AllSchoolYear(), Semester.ALL))
+    # 查询分组后的课程表
+    # 使用 user.get_timetable 可以查询原始课程表
+    time_table = user.get_grouped_timetable(SchoolYear(2020), Semester.SECOND_TERM)
+    for course_name in time_table:
+        print(course_name)
+        for each_class in time_table[course_name]:
+            print(each_class)
 
     env = s.environment()  # 取得环境对象
     # 查询所有可用专业
@@ -54,6 +62,10 @@ if err_message == 'success':
     classes = env.get_class_list(SchoolYear(2018), Semester.SECOND_TERM)
     for each_class in classes:
         print(each_class)
+    # 查询某专业推荐课表
+    suggested_courses = env.get_suggested_course(SchoolYear(2020), Semester.SECOND_TERM, 'B2203', '20122311')
+    print(suggested_courses)
+
 ```
 
 ## 联系方式

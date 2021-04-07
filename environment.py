@@ -30,3 +30,20 @@ class Environment:
         }
         page = self._session.post(URL.CLASS_LIST, data=data, headers=REQUEST_OPTION)
         return parse_class_list_page(page.text)
+
+    def get_suggested_course(self, school_year: SchoolYear, semester: Semester, major_id: str, class_id: str,
+                             entrance_year: str = None):
+        if not entrance_year:
+            entrance_year = '20' + class_id[:2]
+        data = {
+            'xnm': str(school_year),
+            'xqm': semester.to_raw(),
+            'njdm_id': entrance_year,
+            'zyh_id': major_id,
+            'bh_id': class_id,
+            # The two are unknown but necessary :-(
+            'tjkbzdm': '1',
+            'tjkbzxsdm': '0',
+        }
+        page = self._session.post(URL.SUGGESTED_COURSE, data=data, headers=REQUEST_OPTION)
+        return parse_timetable_page(page.text)
