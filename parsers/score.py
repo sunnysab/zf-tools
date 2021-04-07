@@ -27,10 +27,13 @@ def parse_score_list_page(page: str) -> List[Score]:
         fields = {}
 
         for field_name, _, raw_name in __elements:
-            fields[field_name] = course[raw_name]
+            try:
+                fields[field_name] = course[raw_name]
+            except KeyError:
+                fields[field_name] = '空'
 
         '''
-            Soem more processes.
+            Some more processes.
         '''
         fields['score'] = float(fields['score'])
         fields['credit'] = float(fields['credit'])
@@ -45,8 +48,6 @@ def calculate_GPA(scores: List[Score]):
     t = 0.0
 
     for s in scores:
-        # Some warnings happens for missing '.credit' or '.score' in class 'tuple' in Pycharm,
-        # but they can be ignored.
         t += s.credit * s.score
         total_credits += s.credit
 
