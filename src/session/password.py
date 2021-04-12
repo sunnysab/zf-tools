@@ -5,15 +5,8 @@ from typing import Tuple
 import requests
 import rsa
 
-from .global_config import URL, REQUEST_OPTION
-from .environment import Environment
-from .user import User
-
-_session = requests.Session()
-
-
-def create_session() -> requests.Session:
-    return requests.Session()
+from .base import BaseSession
+from src.global_config import URL, REQUEST_OPTION
 
 
 def encrypt_in_rsa(message: bytes, public_key: bytes, exponent: bytes) -> str:
@@ -24,16 +17,10 @@ def encrypt_in_rsa(message: bytes, public_key: bytes, exponent: bytes) -> str:
     return base64.b64encode(encrypted_passwd).decode('utf-8')
 
 
-class Session:
-    _user: str = None
-    _passwd: str = None
-    _session: requests.Session = None
-
-    login_flag: bool = False
+class PasswordSession(BaseSession):
 
     def __init__(self, user: str = None, passwd: str = None):
-        self._user = user
-        self._passwd = passwd
+        super().__init__(user, passwd)
 
     def __get_ras_public_key(self) -> Tuple[bytes, bytes]:
         """
@@ -64,15 +51,12 @@ class Session:
         err_node = page.select(r'div#home.tab-pane.in.active p#tips.bg_danger.sl_danger')[0]
         return err_node.text.strip()
 
-    def login(self, user: str = _user, passwd: str = _passwd) -> str:
+    def login(self) -> str:
         """
         Login the system through simulating a browser
-        :param user: username
-        :param passwd: password in plain
         :return: If the login succeeds, the function will return a User object with the requests session.
                 Otherwise, it will return a string with the error message provided by the page.
         """
-        self._user = user
         self._session = requests.Session()
 
         # Get login page for the first cookie
@@ -80,12 +64,12 @@ class Session:
 
         # Get RAS public key to encode the raw password
         public_key, exponent = self.__get_ras_public_key()
-        encrypted_passwd: str = encrypt_in_rsa(passwd.encode('utf-8'), public_key, exponent)
+        encrypted_passwd: str = encrypt_in_rsa(self._passwd.encode('utf-8'), public_key, exponent)
 
         form_to_post = {
             'csrftoken': self.__get_csrf_token(login_page.text),
             'language': 'zh_CN',
-            'yhm': user,
+            'yhm': self._user,
             'mm': encrypted_passwd
         }
         # If the login process succeeds, turn to other page (It may be not sure.
@@ -94,20 +78,5 @@ class Session:
         if r.url.startswith(URL.LOGIN):
             return self.__get_err_message(r.text)
         else:
-            self.login_flag = True
+            self._login_flag = True
             return 'success'
-
-    def is_login(self) -> bool:
-        return self.login_flag
-
-    def user(self) -> User:
-        if not self.login_flag:
-            raise Exception('You should login first.')
-
-        return User(self._user, self._session)
-
-    def environment(self) -> Environment:
-        if not self.login_flag:
-            raise Exception('You should login first.')
-
-        return Environment(self._session)
