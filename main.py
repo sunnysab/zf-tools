@@ -1,5 +1,5 @@
-import session
-from parsers import *
+from src import session
+from src.parsers import *
 
 s = session.Session()
 err_message = s.login('account', 'password')
@@ -27,6 +27,7 @@ if err_message == 'success':
     # for each_major in majors:
     #     print(each_major)
     #
+    env = s.environment()
     classes = env.get_class_list(SchoolYear(2018), Semester.SECOND_TERM)
     for each_class in classes:
         print(each_class)

@@ -5,8 +5,8 @@
 
 
 import requests
-from global_config import URL, REQUEST_OPTION
-from parsers import *
+from .global_config import URL, REQUEST_OPTION
+from .parsers import *
 
 
 class Environment:

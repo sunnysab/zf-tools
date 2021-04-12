@@ -29,8 +29,9 @@
 当前项目正在开发中，接口可能随时发生变化，实际使用方法以代码为准。
 
 ```python
-import session
-from parsers.defines import Semester, AllSchoolYear, SchoolYear
+
+from src import session
+from src.parsers import Semester, AllSchoolYear, SchoolYear
 
 # 创建一个 session
 s = session.Session()

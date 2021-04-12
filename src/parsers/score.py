@@ -2,7 +2,7 @@ import json
 from collections import namedtuple
 from typing import List
 
-from parsers.defines import Semester
+from src.parsers import Semester
 
 __elements = [
     ('score', '成绩', 'cj'),

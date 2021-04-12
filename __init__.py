@@ -4,5 +4,5 @@
 # @File    : __init__.py
 
 """ All exports """
-from parsers import *
-from session import Session
+from src.parsers import *
+from src.session import Session

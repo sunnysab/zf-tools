@@ -2,8 +2,8 @@ from typing import List, Dict
 
 import requests
 
-from global_config import URL, REQUEST_OPTION
-from parsers import *
+from .global_config import URL, REQUEST_OPTION
+from .parsers import *
 
 
 class User:

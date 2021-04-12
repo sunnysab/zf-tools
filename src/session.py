@@ -5,9 +5,9 @@ from typing import Tuple
 import requests
 import rsa
 
-from global_config import URL, REQUEST_OPTION
-from environment import Environment
-from user import User
+from .global_config import URL, REQUEST_OPTION
+from .environment import Environment
+from .user import User
 
 _session = requests.Session()
 
