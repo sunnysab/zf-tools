@@ -1,8 +1,11 @@
 from src import session
 from src.parsers import *
 
-s = session.Session()
-err_message = s.login('account', 'password')
+# s = session.Session()
+# err_message = s.login('account', 'password')
+
+s = session.SsoSession('account', 'password')
+err_message = s.login()
 
 if err_message == 'success':
     user = s.user()

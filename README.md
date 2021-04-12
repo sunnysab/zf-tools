@@ -77,7 +77,7 @@ if err_message == 'success':
 
 如果你觉得本项目对你有帮助，可以适当地赞助我。一两分我都会很开心 :D
 
-<img src="sponor_code.png" alt="支付宝收款码" style="zoom: 25%;" />
+![支付宝收款码](alipay_donation.png)
 
 ## 版权声明
 
