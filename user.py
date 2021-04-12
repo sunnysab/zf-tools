@@ -59,4 +59,22 @@ class User:
         score_list = self.get_score_list(school_year, semester)
         return calculate_GPA(score_list)
 
+    def get_available_course_ex(self, inner_major_id: str, inner_major_direction_id: str, college_id: str,
+                                class_id: str,
+                                year: SchoolYear, semester: Semester) -> Course:
+        b_flag: bool = True
+        while b_flag:
+            data = {
+                'xqh_id': semester.to_raw(),
+                'jg_id': college_id,
+                'zyh_id': inner_major_id,
+                'zyfx_id': inner_major_direction_id,
+                # 'njdm_id' can be ignored for the API can detect it automatically.
+                'bh_id': class_id,
+                'xbm': 1,
+                'xslbdm': 'wlb'
+            }
+        page = self._session.post(URL.AVAIL_COURSE_LIST, data=data, headers=REQUEST_OPTION)
+        return parse_available_course_page(page.text)
+
 # End of the class User.

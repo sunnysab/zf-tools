@@ -23,7 +23,8 @@ class URL:
     CLASS_LIST = HOME + '/jwglxt/xtgl/comm_cxBjdmList.html?gnmkdm=N214505'
     # Suggested course and time table
     SUGGESTED_COURSE = HOME + '/jwglxt/kbdy/bjkbdy_cxBjKb.html?gnmkdm=N214505'
-
+    # Course selection page for available courses
+    AVAIL_COURSE_LIST = HOME + '/xsxk/zzxkyzb_cxZzxkYzbPartDisplay.html?gnmkdm=N253512'
 
 # End of class URL
 

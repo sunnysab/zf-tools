@@ -15,5 +15,6 @@ from .classes import parse_major_list_page, parse_class_list_page
 from .user_profile import parse_profile_page
 from .score import parse_score_list_page, calculate_GPA
 from .timetable import parse_timetable_page
+from .select_course import parse_available_course_page
 
 # End of file
