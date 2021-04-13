@@ -11,14 +11,11 @@ from ..environment import Environment
 class BaseSession:
     """ Base session class """
 
-    _user: str = None
-    _passwd: str = None
-    _session = requests.Session()
-    _login_flag = False
-
     def __init__(self, username=None, password=None):
         self._user = username
         self._passwd = password
+        self._session = requests.Session()
+        self._login_flag = False
 
     def login(self) -> str:
         pass

@@ -37,7 +37,7 @@ class SsoSession(BaseSession):
         return hashed_passwd
 
     def _get_login_page(self):
-        response = self._session.get(_LOGIN_URL, headers=_DEFAULT_HEADERS, timeout=3)
+        response = self._session.get(_LOGIN_URL, headers=_DEFAULT_HEADERS, timeout=30)
         response.raise_for_status()
 
         page = etree.HTML(response.text)
@@ -63,7 +63,8 @@ class SsoSession(BaseSession):
         return result
 
     def _post_login_request(self, form: dict):
-        response = self._session.post(_LOGIN_URL, data=form, headers=_DEFAULT_HEADERS, timeout=3, allow_redirects=False)
+        response = self._session.post(_LOGIN_URL, data=form, headers=_DEFAULT_HEADERS, timeout=30,
+                                      allow_redirects=False)
         if response.status_code == 302:  # Login successfully
             return 'OK'
         elif response.status_code == 200:  # Login failed
@@ -85,6 +86,6 @@ class SsoSession(BaseSession):
             return result
 
         self._login_flag = True
-        r = self._session.get(_LOGIN_URL + '?service=' + redirect, headers=_DEFAULT_HEADERS, timeout=3)
+        r = self._session.get(_LOGIN_URL + '?service=' + redirect, headers=_DEFAULT_HEADERS, timeout=30)
         r.raise_for_status()
         return 'success'
