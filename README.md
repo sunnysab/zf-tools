@@ -27,10 +27,9 @@
 
 ## 使用示例
 
-当前项目正在开发中，接口可能随时发生变化，实际使用方法以代码为准。
+快速入门：
 
 ```python
-
 from src import session
 from src.parsers import Semester, AllSchoolYear, SchoolYear
 
@@ -67,8 +66,16 @@ if err_message == 'success':
     # 查询某专业推荐课表
     suggested_courses = env.get_suggested_course(SchoolYear(2020), Semester.SECOND_TERM, 'B2203', '20122311')
     print(suggested_courses)
-
 ```
+
+如果您需要将本项目用于您的学校，可以修改 `src/global_config.py` 中的 `URL.HOME`。该参数默认为：
+
+```python
+# Server address for jwxt
+HOME = 'http://jwxt.sit.edu.cn'
+```
+
+注意字符串最后没有 `/`。
 
 ## 联系方式
 
