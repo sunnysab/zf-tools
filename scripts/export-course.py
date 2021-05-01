@@ -7,7 +7,9 @@ from typing import List, Tuple
 import src as zf
 
 """
-    加载 group.csv，每行为逗号分隔的 [部门、姓名、学号、密码]
+    加载 group.csv，每行为 TAB 分隔的 [部门、姓名、学号、密码]
+    用 TAB 分隔列是因为有些人的密码中含半角逗号
+    注意：在 PyCharm 中打开 csv 文件并按下 TAB 时，IDE 可能会将 TAB 自动转换成若干空格，所以清确认你实际输入的字符
 """
 # [(user, password), ...]
 preprocess = lambda line: tuple(line.rstrip().split('\t'))
