@@ -11,6 +11,11 @@ __elements = [
     ('place', '教室', 'cdmc'),
     ('teacher', '教师', 'xm'),
     ('campus', '校区', 'xqmc'),
+    ('credit', '学分', 'xf'),
+    ('hours', '学时', 'zxs'),
+    ('dyn_class_id', '教学班', 'jxbmc'),
+    ('course_id', '课程代码', 'kch'),
+    ('prefered_class', '配课班', 'jxbzc'),
 ]
 
 # New namedtuple type
