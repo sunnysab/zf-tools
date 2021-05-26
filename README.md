@@ -20,6 +20,8 @@
 - [x] 获取专业列表
 - [x] 获取专业推荐课表
 - [x] 批量导出学生课表/查询空闲学生 ([Here](https://github.com/SIT-Yiban/work-schedule))
+- [x] 导出全校课程列表 ([Here](scripts/export-suggested-course.py))
+- [x] 导出全校教室使用情况 ([Here](scripts/export-available-classrooms.py))
 - [ ] 查询专业培养计划
 - [ ] 选课
 - [ ] 评教(短时间内不推出)
