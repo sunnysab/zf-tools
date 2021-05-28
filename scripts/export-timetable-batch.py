@@ -4,6 +4,7 @@
 # @File    : export-course.py
 
 from typing import List, Tuple
+
 import src as zf
 
 """
@@ -12,10 +13,10 @@ import src as zf
     注意：在 PyCharm 中打开 csv 文件并按下 TAB 时，IDE 可能会将 TAB 自动转换成若干空格，所以清确认你实际输入的字符
 """
 # [(user, password), ...]
-preprocess = lambda line: tuple(line.rstrip().split('\t'))
+strip_split = lambda line: tuple(line.rstrip().split('\t'))
 
 with open('group.csv', 'r', encoding='utf-8') as f:
-    members: List[Tuple[str, str, str, str]] = list(map(preprocess, f.readlines()))
+    members: List[Tuple[str, str, str, str]] = list(map(strip_split, f.readlines()))
 print(f'加载了 {len(members)} 个账户.')
 
 """
