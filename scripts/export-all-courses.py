@@ -27,12 +27,17 @@ classes = [x for x in classes if x.grade in [2016, 2017, 2018, 2019, 2020]]
 courses = []
 loaded_count = 0
 for c in classes:
-    suggested_course = env.get_suggested_course(SchoolYear(2020), Semester.SECOND_TERM, c.major_id, c.class_id, c.grade)
+    suggested_course = env.get_suggested_course_list(SchoolYear(2020), Semester.SECOND_TERM, c.major_id, c.class_id,
+                                                     c.grade)
     courses.extend(suggested_course)
 
     loaded_count += 1
     if loaded_count % 10 == 0:
         print(f'{loaded_count} classes are loaded, total {len(courses)} results by now.')
-        # time.sleep(5)
 
+print(f'Total {len(courses)} results loaded.')
+
+""" Step 3 """
+courses = [x._asdict() for x in set(courses)]
+print(f'After deduplication, there are {len(courses)} to save.')
 json.dump(courses, open('courses.json', 'w+', encoding='utf-8'))

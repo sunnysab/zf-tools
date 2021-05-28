@@ -59,6 +59,7 @@ class User:
         score_list = self.get_score_list(school_year, semester)
         return calculate_GPA(score_list)
 
+    # TODO.
     def get_available_course_ex(self, inner_major_id: str, inner_major_direction_id: str, college_id: str,
                                 class_id: str,
                                 year: SchoolYear, semester: Semester) -> Course:

@@ -66,7 +66,7 @@ if err_message == 'success':
     for each_class in classes:
         print(each_class)
     # 查询某专业推荐课表
-    suggested_courses = env.get_suggested_course(SchoolYear(2020), Semester.SECOND_TERM, 'B2203', '20122311')
+    suggested_courses = env.get_suggested_course_list(SchoolYear(2020), Semester.SECOND_TERM, 'B2203', '20122311')
     print(suggested_courses)
 ```
 

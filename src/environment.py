@@ -4,7 +4,10 @@
 # @File    : environment.py
 
 
+from typing import List
+
 import requests
+
 from .global_config import URL, REQUEST_OPTION
 from .parsers import *
 
@@ -22,7 +25,7 @@ class Environment:
         page = self._session.get(URL.MAJOR_LIST, params=param, headers=REQUEST_OPTION)
         return parse_major_list_page(page.text)
 
-    def get_class_list(self, school_year: SchoolYear, semester: Semester):
+    def get_class_list(self, school_year: SchoolYear, semester: Semester) -> List[Class]:
         data = {
             'xnm': str(school_year),
             'xqm': semester.to_raw(),
@@ -31,8 +34,8 @@ class Environment:
         page = self._session.post(URL.CLASS_LIST, data=data, headers=REQUEST_OPTION)
         return parse_class_list_page(page.text)
 
-    def get_suggested_course(self, school_year: SchoolYear, semester: Semester, major_id: str, class_id: str,
-                             entrance_year: str = None):
+    def get_suggested_course_list(self, school_year: SchoolYear, semester: Semester, major_id: str, class_id: str,
+                                  entrance_year: str = None) -> List[Course]:
         if not entrance_year:
             entrance_year = '20' + class_id[:2]
         data = {

@@ -2,7 +2,6 @@ import json
 from collections import namedtuple
 from typing import List
 
-# TODO: 增加教学班ID、名称、课程代码等字段
 __elements = [
     ('course_name', '课程名称', 'kcmc'),
     ('day', '星期', 'xqjmc'),
@@ -72,7 +71,6 @@ def __expand_time_index(time_string: str) -> tuple:
     return tuple(indices)
 
 
-# TODO: 合并同类课程
 def parse_timetable_page(page: str) -> List[Course]:
     json_page = json.loads(page)
     course_list = json_page['kbList']
@@ -92,9 +90,15 @@ def parse_timetable_page(page: str) -> List[Course]:
         # '1-3' -> (1, 2, 3)
         fields['time_index'] = __expand_time_index(fields['time_index'])
         # '赵,钱,孙,李' -> ['赵','钱','孙','李']
-        fields['teacher'] = fields['teacher'].split(',')
+        fields['teacher'] = tuple(fields['teacher'].split(','))
         # '星期一' -> 1
         fields['day'] = DAY_MAP[fields['day']]
+        # '20108311;20108312' -> ['20108311', '20108312']
+        fields['prefered_class'] = tuple(fields['prefered_class'].split(';'))
+        # '1.5' -> 1.5
+        fields['credit'] = float(fields['credit'])
+        fields['hours'] = float(fields['credit'])
+        fields['dyn_class_id'] = fields['dyn_class_id'].strip() if fields['dyn_class_id'] is not None else None
 
         result.append(Course(**fields))
 
