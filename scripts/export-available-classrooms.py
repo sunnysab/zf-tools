@@ -35,9 +35,11 @@ for this_course in courses:
     processed_courses.append(this_course)
 
     classroom = this_course.get('place')
-    if not classroom.startswith('一教') and not classroom.startswith('二教'):
+    if not classroom.startswith('一教') and not classroom.startswith('二教') and not classroom.startswith('南图')\
+            and not classroom.startswith('32') and not classroom.startswith('34'):
         continue
     for i in this_course['time_index']:
+        print(classroom)
         for w in this_course['weeks']:
             key = w * 10 + this_course['day']
             if classroom not in classroom_mapping:
