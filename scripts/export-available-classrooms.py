@@ -30,9 +30,8 @@ processed_courses = []
 # classroom -> { (week, day) -> flag }
 classroom_mapping = dict()
 
-for course in courses:
+for this_course in courses:
     # For readability, not for performance.
-    this_course = dict(zip(__cols, course))
     processed_courses.append(this_course)
 
     classroom = this_course.get('place')
@@ -63,7 +62,7 @@ for classroom in classrooms:
                 classroom_mapping[classroom][key] = 0
 
 # Write time table to file
-with open('available_time.txt', 'w+', encoding='utf-8') as out_file:
+with open('busy_time.txt', 'w+', encoding='utf-8') as out_file:
     for classroom in classrooms:
         for week_day in classroom_mapping[classroom]:
             out_file.write(
