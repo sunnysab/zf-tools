@@ -80,7 +80,8 @@ def parse_timetable_page(page: str) -> List[Course]:
         fields = {}
 
         for field_name, _, raw_name in __elements:
-            fields[field_name] = course[raw_name]
+            item = course.get(raw_name, '')
+            fields[field_name] = item
 
         """
             Some more processes

@@ -30,7 +30,7 @@ class BaseSession:
         return User(self._user, self._session)
 
     def environment(self) -> Environment:
-        if not self._login_flag:
-            raise Exception('You should login first.')
+        # if not self._login_flag:
+        #     raise Exception('You should login first.')
 
         return Environment(self._session)

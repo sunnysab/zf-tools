@@ -22,6 +22,7 @@ __elements_class = [
     ('major_name', '专业名称', 'zymc'),
     ('major_id', '专业代码', 'zyh_id'),
     ('class_id', '班级', 'bh'),
+    ('class_new_id', '班级代码', 'bh_id')
 ]
 
 # New namedtuple type

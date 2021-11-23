@@ -30,10 +30,10 @@ if err_message == 'success':
     # for each_major in majors:
     #     print(each_major)
     #
-    env = s.environment()
-    classes = env.get_class_list(SchoolYear(2018), Semester.SECOND_TERM)
-    for each_class in classes:
-        print(each_class)
+    env = s.user()
+
+    classes = env.get_timetable(SchoolYear(2020), Semester.SECOND_TERM)
+    print(classes)
 
 else:
     print(err_message)

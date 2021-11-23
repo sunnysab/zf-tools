@@ -37,3 +37,9 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 REQUEST_OPTION = {
     'User-Agent': USER_AGENT
 }
+
+TEMP_COOKIE = ''
+COOKIE_DICT = {}
+for i in TEMP_COOKIE.split(';'):
+    v = i.split("=")
+    COOKIE_DICT[v[0]] = v[1]
